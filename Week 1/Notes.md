@@ -229,3 +229,57 @@ int main(void)
     printf("Hello, %s\n", name);
 }
 ```
+
+
+## Basic Math in C
+
+As I mention before we can use `get_int` to get numbers from the user and store them in variables.
+
+For example:
+
+```c
+int x = get_int("x: ");
+int y = get_int("y: ");
+```
+
+We can then perform mathematical operations on these variables.
+
+### Addition
+
+```c
+int sum = x + y;
+printf("%d\n", sum);
+```
+
+We can also print multiple values using multiple format specifiers:
+
+```c
+printf("%d + %d = %d\n", x, y, x + y);
+```
+
+The `%d` tells `printf` that the value is an integer.
+
+### Incrementing a Variable
+
+To increase a variable by `1`:
+
+```c
+x = x + 1;
+```
+
+A shorter way is:
+
+```c
+x += 1;
+```
+
+we can also decrement it by `1` in the same way:
+
+```c
+x -= 1;
+```
+
+it could be also any other number.
+
+
+
