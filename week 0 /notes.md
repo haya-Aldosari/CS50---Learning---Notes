@@ -1,4 +1,4 @@
-## Introduction to Computer Science
+## Video 1: Introduction to Computer Science
 
 ### 1. Programming and Problem Solving
 
