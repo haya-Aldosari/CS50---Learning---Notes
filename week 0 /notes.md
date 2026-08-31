@@ -1,6 +1,4 @@
-# Week 0-1
-
-## Introduction 
+## Introduction to Computer Science
 
 ### 1. Programming and Problem Solving
 
@@ -65,7 +63,7 @@ While in binary, we use powers of 2:
 **2⁰, 2¹, 2², ...**
 
 
-**Video 2: Binary**
+## Video 2: Binary
 
 ### 1. Representing Different Types of Data
 
@@ -160,6 +158,7 @@ For example:
 **Text → Characters → Numerical representation → Processing → Output**
 
 This is the same fundamental idea behind NLP models: transforming human language into a form that computers can work with.
+
 
 
 ## Video 3: Algorithms
