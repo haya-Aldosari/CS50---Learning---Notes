@@ -102,3 +102,130 @@ Here:
 ---
 
 
+## Video 2: Get String
+
+### 1. Getting User Input
+
+CS50 provides functions that allow us to get input from the user.
+
+The function follows this pattern:
+
+```c
+get_<type>()
+```
+
+For example:
+
+```c
+get_string()
+get_int()
+get_float()
+```
+
+These functions come from the **CS50 library**.
+
+To use them, we include:
+
+```c
+#include <cs50.h>
+```
+
+---
+
+### 2. Variables and Data Types
+
+A variable stores a value, and every variable has a **data type**.
+
+Some common data types in C are:
+
+| Data Type | Example          | Purpose              |
+| --------- | ---------------- | -------------------- |
+| `string`  | `"Haya"`         | Text                 |
+| `int`     | `25`             | Integer              |
+| `float`   | `3.14`           | Decimal number       |
+| `long`    | `1000000`        | Large integer        |
+| `double`  | `3.141592`       | More precise decimal |
+| `bool`    | `true` / `false` | Boolean value        |
+| `char`    | `'A'`            | Single character     |
+
+For example, to get a name from the user:
+
+```c
+string name = get_string("What's your name? ");
+```
+
+The general pattern is:
+
+```c
+type variable_name = get_type();
+```
+
+The type of the variable should match the type returned by the input function.
+
+---
+
+### 3. Printing Variables with `printf`
+
+We can use `printf` to print variables.
+
+Inside the string, we use a **format specifier** to tell `printf` what type of value we want to insert.
+
+For example:
+
+```c
+printf("Hello, %s\n", name);
+```
+
+Here:
+
+* `%s` → tells `printf` that the value is a string.
+* `name` → is the variable whose value will be inserted.
+
+Some common format specifiers are:
+
+| Type     | Format Specifier |
+| -------- | ---------------- |
+| `string` | `%s`             |
+| `int`    | `%i` or `%d`     |
+| `float`  | `%f`             |
+| `double` | `%f`             |
+| `char`   | `%c`             |
+| `long`   | `%li`            |
+
+For example:
+
+```c
+int number = 20;
+printf("The number is %i\n", number);
+```
+
+The variable is placed **after the comma**, outside the quotation marks.
+
+---
+
+### 4. Comments
+
+We can add comments to our code using `//`.
+
+Comments are ignored by the compiler and are used to explain the code or leave notes for ourselves.
+
+```c
+// Ask the user for their name
+string name = get_string("What's your name? ");
+```
+
+---
+
+### Example Program
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    string name = get_string("What's your name? ");
+
+    printf("Hello, %s\n", name);
+}
+```
