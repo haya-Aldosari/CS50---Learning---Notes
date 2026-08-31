@@ -1,4 +1,4 @@
-# CS50 — Week 0-1
+# Week 0-1
 
 ## Introduction 
 
@@ -66,7 +66,7 @@ While in binary, we use powers of 2:
 
 
 
-# CS50 — Week 0-2
+# Week 0-2
 
 ### 1. Representing Different Types of Data
 
