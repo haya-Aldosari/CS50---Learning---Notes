@@ -1,4 +1,4 @@
-## Video 1: Learning CS50
+## Video 0: Learning CS50
 
 ### 1. Writing Code
 
