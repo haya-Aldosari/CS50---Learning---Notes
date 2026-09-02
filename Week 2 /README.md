@@ -420,3 +420,315 @@ The most important concepts to remember are:
 6. **Loops allow us to efficiently work through an array.**
 
 
+## video 4: Strings
+
+The concept of **strings** is especially interesting because, in C, a string is essentially an **array of characters**.
+
+This connects several important concepts together:
+
+**Characters → ASCII → Numbers → Binary**
+
+At the lowest level, computers ultimately represent data using bits and binary.
+
+---
+
+## Characters Are Numbers
+
+A character can be represented by a numeric value using **ASCII**.
+
+For example:
+
+```text
+'A' → 65
+'B' → 66
+'a' → 97
+```
+
+Because characters are represented by numbers, we can print the same character using different format specifiers.
+
+For example:
+
+```c
+char c = 'A';
+
+printf("%c\n", c);
+printf("%i\n", c);
+```
+
+Output:
+
+```text
+A
+65
+```
+
+`%c` tells `printf` to interpret the value as a character.
+
+`%i` tells `printf` to interpret the value as an integer.
+
+We can also go in the other direction:
+
+```c
+int n = 65;
+
+printf("%c\n", n);
+```
+
+Output:
+
+```text
+A
+```
+
+This demonstrates the relationship between characters and their numeric ASCII representations.
+
+---
+
+## Strings Are Arrays of Characters
+
+A string is a sequence of characters.
+
+For example:
+
+```text
+"HI"
+```
+
+can be thought of as:
+
+```text
+'H'  'I'
+```
+
+And because each character has a numeric representation, these characters are stored in memory as numeric values.
+
+In C, a string is represented as an array of `char` values that ends with a special character called the **null character**:
+
+```text
+\0
+```
+
+For example:
+
+```text
+"HI"
+```
+
+is stored conceptually as:
+
+```text
+'H'  'I'  '\0'
+```
+
+So the `\0` tells the computer:
+
+> The string ends here.
+
+---
+
+## Why Don't We Specify the Size?
+
+Normally, when creating an array, we specify its size:
+
+```c
+int numbers[3];
+```
+
+But when working with a string, we can write:
+
+```c
+string name = "Haya";
+```
+
+without explicitly specifying the size.
+
+The important idea is that the string has a terminating `\0`.
+
+Conceptually:
+
+```text
+'H'  'a'  'y'  'a'  '\0'
+```
+
+The `\0` marks the end of the string.
+
+Therefore, the computer can determine where the string ends by looking for the null character.
+
+---
+
+## Strings in the CS50 Library
+
+CS50 provides a `string` type through its library:
+
+```c
+#include <cs50.h>
+```
+
+We can then write:
+
+```c
+string name = "Haya";
+```
+
+Although `string` makes working with text easier, it is important to understand what is happening underneath:
+
+A string is essentially a sequence of `char` values stored in memory and terminated by `\0`.
+
+---
+
+## Accessing Characters Using Indexes
+
+Because a string behaves like an array of characters, we can access individual characters using indexes.
+
+For example:
+
+```c
+string name = "Haya";
+
+printf("%c\n", name[0]);
+printf("%c\n", name[1]);
+printf("%c\n", name[2]);
+printf("%c\n", name[3]);
+```
+
+Output:
+
+```text
+H
+a
+y
+a
+```
+
+The indexes are:
+
+```text
+name = "Haya"
+
+index:  0   1   2   3
+value:  H   a   y   a
+```
+
+We can also use a loop:
+
+```c
+for (int i = 0; i < 4; i++)
+{
+    printf("%c\n", name[i]);
+}
+```
+
+This is another example of how **arrays and loops work together**.
+
+---
+
+## Finding the Length of a String
+
+The C library provides a function called:
+
+```c
+strlen()
+```
+
+from:
+
+```c
+#include <string.h>
+```
+
+`strlen()` returns the number of characters in a string **before the `\0`**.
+
+For example:
+
+```c
+#include <stdio.h>
+#include <string.h>
+
+string name = "Haya";
+
+printf("%lu\n", strlen(name));
+```
+
+The result is:
+
+```text
+4
+```
+
+Even though the string occupies space for:
+
+```text
+H  a  y  a  \0
+```
+
+`strlen()` returns:
+
+```text
+4
+```
+
+because `\0` is not counted as part of the string's length.
+
+---
+
+
+## Why Is This Useful?
+
+Knowing the length of a string is useful when we need to apply conditions to user input.
+
+For example:
+
+```c
+if (strlen(name) >= 5)
+{
+    printf("Valid\n");
+}
+```
+
+This checks whether the user input contains at least 5 characters.
+
+This same idea appears in many real applications, such as:
+
+* Validating user input
+* Checking minimum or maximum text length
+* Processing usernames
+* Checking passwords
+* Processing natural language
+
+For example, in a larger project, we might need to make sure that a user's input contains a minimum number of characters before accepting it.
+
+---
+
+## The Bigger Picture
+
+Strings connect several concepts we have learned:
+
+```text
+String
+   ↓
+Array of characters
+   ↓
+Characters
+   ↓
+ASCII values
+   ↓
+Numbers
+   ↓
+Binary
+```
+
+So although we write:
+
+```c
+string name = "Haya";
+```
+
+the computer ultimately stores the information as numerical values in memory, represented at the hardware level using binary.
+
+This is one of the important ideas behind learning C:
+
+> High-level concepts such as strings are ultimately represented using lower-level data stored in memory.
+
+---
+
+
