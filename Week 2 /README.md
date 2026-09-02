@@ -177,5 +177,246 @@ We can:
 This makes it much easier to understand **what the program is actually doing**, rather than only looking at the code and guessing.
 
 
+## video 3: Average
+
+An **array** allows us to store multiple values of the same data type under one variable name.
+
+Instead of creating separate variables:
+
+```c
+int score1;
+int score2;
+int score3;
+```
+
+We can use an array:
+
+```c
+int scores[3];
+```
+
+An array is useful when we have multiple related values that we want to store and process together.
+
+---
+
+## Creating an Array
+
+The general structure is:
+
+```c
+type name[count] = {content};
+```
+
+For example:
+
+```c
+int scores[3] = {90, 85, 95};
+```
+
+The type of the array determines the type of all its elements.
+
+For example:
+
+```c
+int numbers[3] = {10, 20, 30};
+
+char letters[3] = {'A', 'B', 'C'};
+```
+
+All elements within the **same array must have the same data type**.
+
+---
+
+## Index
+
+Each element in an array has an **index**, which identifies its position.
+
+An important rule is that indexing starts at **0**, not 1.
+
+For example:
+
+```text
+scores = {90, 85, 95}
+
+index:    0   1   2
+value:   90  85  95
+```
+
+To access an element:
+
+```c
+scores[0]
+```
+
+This gives us the first element:
+
+```text
+90
+```
+
+We can also modify an element:
+
+```c
+scores[1] = 100;
+```
+
+Now the array becomes:
+
+```text
+{90, 100, 95}
+```
+
+---
+
+## Array Size
+
+The number inside the brackets represents the **size** of the array.
+
+```c
+int scores[3];
+```
+
+This creates an array with **3 elements**.
+
+The indexes are:
+
+```text
+0
+1
+2
+```
+
+Therefore:
+
+```text
+Size = 3
+Last index = 2
+```
+
+In general:
+
+```text
+Last index = size - 1
+```
+
+Trying to access:
+
+```c
+scores[3]
+```
+
+would be outside the valid indexes of this array.
+
+---
+
+## Assigning Values Later
+
+We can create an array without immediately assigning its values:
+
+```c
+int scores[3];
+
+scores[0] = 90;
+scores[1] = 85;
+scores[2] = 95;
+```
+
+The size of the array is fixed when it is created.
+
+---
+
+## Arrays and Loops
+
+Arrays and loops work very well together.
+
+Instead of accessing every element manually:
+
+```c
+printf("%i\n", scores[0]);
+printf("%i\n", scores[1]);
+printf("%i\n", scores[2]);
+```
+
+We can use a loop:
+
+```c
+for (int i = 0; i < 3; i++)
+{
+    printf("%i\n", scores[i]);
+}
+```
+
+The loop moves through the array **index by index**.
+
+The values of `i` will be:
+
+```text
+i = 0 → scores[0]
+i = 1 → scores[1]
+i = 2 → scores[2]
+```
+
+When `i` becomes `3`, the condition:
+
+```c
+i < 3
+```
+
+becomes false, so the loop stops.
+
+This prevents us from trying to access `scores[3]`, which is outside the array.
+
+---
+
+## Why Arrays + Loops Are Useful
+
+Arrays become especially useful when working with a large number of values.
+
+For example, instead of writing:
+
+```c
+printf("%i\n", scores[0]);
+printf("%i\n", scores[1]);
+printf("%i\n", scores[2]);
+```
+
+we can process all elements using one loop:
+
+```c
+for (int i = 0; i < 3; i++)
+{
+    printf("%i\n", scores[i]);
+}
+```
+
+The same idea can be used to:
+
+* Read values
+* Print values
+* Modify values
+* Calculate totals
+* Search for values
+* Process large amounts of data
+
+---
+
+## Key Takeaway
+
+An array gives us:
+
+**One variable → Multiple values → Same data type → Accessed using indexes**
+
+And loops make it easy to:
+
+**Read → Modify → Process → Iterate through every element**
+
+The most important concepts to remember are:
+
+1. **Arrays store multiple values.**
+2. **All elements in one array have the same type.**
+3. **Indexing starts at 0.**
+4. **The size is fixed when the array is created.**
+5. **The last valid index is `size - 1`.**
+6. **Loops allow us to efficiently work through an array.**
 
 
