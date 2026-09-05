@@ -731,4 +731,465 @@ This is one of the important ideas behind learning C:
 
 ---
 
+# CS50 Week 2 – Uppercase
+
+## Overview
+
+This lesson explains how characters are represented in C and how lowercase letters can be converted into uppercase letters.
+
+It also shows the difference between implementing the logic manually using ASCII values and using built-in functions from the C Standard Library.
+
+---
+
+## Characters and ASCII
+
+In C, characters are internally represented as numbers using **ASCII**.
+
+For example:
+
+```text
+A = 65
+B = 66
+
+a = 97
+b = 98
+```
+
+The difference between a lowercase letter and its uppercase version is usually:
+
+```text
+97 - 65 = 32
+```
+
+Because characters are represented as numbers, we can perform arithmetic operations on them.
+
+For example:
+
+```c
+'a' - 32
+```
+
+produces:
+
+```text
+'A'
+```
+
+---
+
+## Strings as Arrays
+
+A string is an array of characters.
+
+This means that we can access each character using its index:
+
+```c
+s[i]
+```
+
+We can loop through the string and process each character individually.
+
+Example:
+
+```c
+for (int i = 0, n = strlen(s); i < n; i++)
+{
+    // Process s[i]
+}
+```
+
+---
+
+## Manual Uppercase Conversion
+
+We can check whether a character is lowercase:
+
+```c
+if (s[i] >= 'a' && s[i] <= 'z')
+```
+
+Then convert it manually:
+
+```c
+printf("%c", s[i] - 32);
+```
+
+A better version avoids directly using the number `32`:
+
+```c
+printf("%c", s[i] - ('a' - 'A'));
+```
+
+This works because of the ASCII relationship between uppercase and lowercase letters.
+
+---
+
+## Using `ctype.h`
+
+Instead of implementing character conversion manually, C provides useful functions through:
+
+```c
+#include <ctype.h>
+```
+
+Important functions include:
+
+```c
+islower(c)
+toupper(c)
+tolower(c)
+```
+
+### `islower()`
+
+Checks whether a character is lowercase.
+
+```c
+if (islower(s[i]))
+```
+
+### `toupper()`
+
+Converts a lowercase character to uppercase.
+
+```c
+toupper(s[i])
+```
+
+### `tolower()`
+
+Converts an uppercase character to lowercase.
+
+```c
+tolower(s[i])
+```
+
+---
+
+## Simpler Solution
+
+At first, we could write:
+
+```c
+if (islower(s[i]))
+{
+    printf("%c", toupper(s[i]));
+}
+else
+{
+    printf("%c", s[i]);
+}
+```
+
+However, `toupper()` already handles characters that do not need conversion.
+
+For example:
+
+```text
+a → A
+b → B
+A → A
+5 → 5
+! → !
+```
+
+Therefore, the condition is unnecessary.
+
+The code can simply be:
+
+```c
+for (int i = 0, n = strlen(s); i < n; i++)
+{
+    printf("%c", toupper(s[i]));
+}
+```
+
+---
+
+## Key Takeaways
+
+* Characters in C are represented internally using ASCII values.
+* A string is an array of characters.
+* Characters can be accessed using an index such as `s[i]`.
+* ASCII values allow arithmetic operations on characters.
+* Lowercase letters can be converted to uppercase manually.
+* The `ctype.h` library provides functions for character manipulation.
+* `toupper()` converts characters to uppercase.
+* `tolower()` converts characters to lowercase.
+* `islower()` checks whether a character is lowercase.
+* Using built-in library functions is usually simpler and clearer than manually implementing the same logic.
+
+## Main Idea
+
+Understanding ASCII helps explain **how character conversion works internally**, while functions such as `toupper()` provide a higher-level abstraction that makes the code simpler and easier to maintain.
+
+
+# CS50 Week 2 – Command-Line Arguments
+
+## Overview
+
+Command-line arguments allow us to pass information to a program **when we run it from the terminal**, instead of asking the user for input after the program starts.
+
+Normally, we write:
+
+```c
+int main(void)
+```
+
+But to receive command-line arguments, we can write:
+
+```c
+int main(int argc, string argv[])
+```
+
+---
+
+## `argc` – Argument Count
+
+`argc` stores the **number of command-line arguments** passed to the program.
+
+For example:
+
+```bash
+./hello Haya
+```
+
+There are two arguments:
+
+```text
+./hello
+Haya
+```
+
+Therefore:
+
+```c
+argc = 2;
+```
+
+The program name itself is always counted as the first argument.
+
+---
+
+## `argv` – Argument Vector
+
+`argv` is an **array of strings** containing the command-line arguments.
+
+For:
+
+```bash
+./hello Haya
+```
+
+The values are:
+
+```text
+argv[0] = "./hello"
+argv[1] = "Haya"
+```
+
+So:
+
+```c
+printf("%s\n", argv[1]);
+```
+
+prints:
+
+```text
+Haya
+```
+
+---
+
+## Using Command-Line Arguments
+
+Example:
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(int argc, string argv[])
+{
+    printf("Hello, %s\n", argv[1]);
+}
+```
+
+Run:
+
+```bash
+./hello Haya
+```
+
+Output:
+
+```text
+Hello, Haya
+```
+
+This allows the program to receive input directly from the command used to run it.
+
+---
+
+## Checking the Number of Arguments
+
+A program should check `argc` before accessing values inside `argv`.
+
+Example:
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(int argc, string argv[])
+{
+    if (argc == 2)
+    {
+        printf("Hello, %s\n", argv[1]);
+    }
+    else
+    {
+        printf("Hello, world\n");
+    }
+}
+```
+
+Here:
+
+```c
+argc == 2
+```
+
+means that the program expects:
+
+1. The program name.
+2. One additional argument.
+
+For example:
+
+```bash
+./hello Haya
+```
+
+---
+
+## Why Checking `argc` Is Important
+
+If we try to access:
+
+```c
+argv[1]
+```
+
+without making sure it exists, the program may behave incorrectly.
+
+For example:
+
+```bash
+./hello
+```
+
+Only contains:
+
+```text
+argv[0] = "./hello"
+```
+
+There is no `argv[1]`.
+
+Therefore, checking `argc` makes the program safer and allows us to validate the user's input.
+
+---
+
+## Looping Through Arguments
+
+Because `argv` is an array, we can use a loop to access every argument:
+
+```c
+for (int i = 0; i < argc; i++)
+{
+    printf("%s\n", argv[i]);
+}
+```
+
+If we run:
+
+```bash
+./program Haya AI Student
+```
+
+The arguments are approximately:
+
+```text
+argv[0] = "./program"
+argv[1] = "Haya"
+argv[2] = "AI"
+argv[3] = "Student"
+```
+
+and:
+
+```c
+argc = 4;
+```
+
+---
+
+## Important Difference
+
+Regular user input happens **after the program starts**, for example:
+
+```c
+string name = get_string("Name: ");
+```
+
+Command-line arguments are provided **when the program is started**:
+
+```bash
+./hello Haya
+```
+
+So instead of waiting for the program to ask for input, we give the information directly through the terminal command.
+
+---
+
+## Key Takeaways
+
+* Command-line arguments allow input to be passed when running a program.
+* `main` can receive two important parameters:
+
+```c
+int main(int argc, string argv[])
+```
+
+* `argc` means **argument count**.
+* `argv` means **argument vector**.
+* `argv` is an array of strings.
+* `argv[0]` is always the program name.
+* Additional arguments start from `argv[1]`.
+* Always check `argc` before accessing an argument.
+* Since `argv` is an array, loops can be used to process multiple arguments.
+
+## Main Idea
+
+Instead of writing only:
+
+```bash
+./program
+```
+
+we can pass data directly:
+
+```bash
+./program argument
+```
+
+and access that data inside the program using:
+
+```c
+argv[index]
+```
+
+This makes programs more flexible and introduces an important way that real command-line programs receive input.
 
