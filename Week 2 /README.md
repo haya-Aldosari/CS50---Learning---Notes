@@ -731,9 +731,7 @@ This is one of the important ideas behind learning C:
 
 ---
 
-# CS50 Week 2 – Uppercase
-
-## Overview
+# video 5: Uppercase
 
 This lesson explains how characters are represented in C and how lowercase letters can be converted into uppercase letters.
 
@@ -924,9 +922,7 @@ for (int i = 0, n = strlen(s); i < n; i++)
 Understanding ASCII helps explain **how character conversion works internally**, while functions such as `toupper()` provide a higher-level abstraction that makes the code simpler and easier to maintain.
 
 
-# CS50 Week 2 – Command-Line Arguments
-
-## Overview
+# video 6: Arguments
 
 Command-line arguments allow us to pass information to a program **when we run it from the terminal**, instead of asking the user for input after the program starts.
 
