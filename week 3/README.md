@@ -397,3 +397,377 @@ So Selection Sort is not very efficient for large datasets.
 
 ---
 
+## video 4: Bubble Sort
+
+**Bubble Sort** is a sorting algorithm that repeatedly compares **adjacent elements** and swaps them if they are in the wrong order.
+
+The larger values gradually move toward the end of the array.
+
+Example:
+
+```text
+6 3 8 5 2
+```
+
+Compare `6` and `3`:
+
+```text
+3 6 8 5 2
+```
+
+Then compare `6` and `8`:
+
+```text
+3 6 8 5 2
+```
+
+No swap is needed.
+
+Then compare `8` and `5`:
+
+```text
+3 6 5 8 2
+```
+
+Then:
+
+```text
+3 6 5 2 8
+```
+
+After one full pass, the largest number has moved to the end.
+
+---
+
+## Main Idea
+
+Bubble Sort repeatedly performs:
+
+```text
+Compare two adjacent elements
+
+If left > right:
+    Swap them
+```
+
+After every pass, another large value reaches its correct position.
+
+The array can be viewed as:
+
+```text
+[ Unsorted | Sorted ]
+```
+
+The sorted section grows from the **right side**.
+
+---
+
+## Pseudocode
+
+```text
+Repeat n - 1 times
+
+    For each adjacent pair
+
+        If numbers are out of order
+            Swap them
+```
+
+An improved version can also check whether any swap happened:
+
+```text
+If no swaps happened
+    Stop
+```
+
+Because if no elements needed to be swapped, the array is already sorted.
+
+---
+
+## Running Time
+
+The **worst case** is:
+
+```text
+O(n²)
+```
+
+---
+
+## Best Case
+
+Unlike Selection Sort, Bubble Sort can stop early if the array is already sorted.
+
+Example:
+
+```text
+1 2 3 4 5
+```
+
+The algorithm makes one pass, detects that no swaps were needed, and stops.
+
+Therefore:
+
+```text
+Best Case: Ω(n)
+```
+
+---
+
+## Bubble Sort vs Selection Sort
+
+```text
+Selection Sort
+Worst Case: O(n²)
+Best Case:  Ω(n²)
+
+Bubble Sort
+Worst Case: O(n²)
+Best Case:  Ω(n)
+```
+
+Bubble Sort can therefore perform better when the data is already sorted or nearly sorted.
+
+---
+
+## video 5: Recursion
+
+**Recursion** is a programming technique where a function **calls itself** to solve a smaller version of the same problem.
+
+---
+
+## Two Important Parts
+
+Every recursive function usually needs:
+
+### 1. Base Case
+
+The **Base Case** is the condition that stops the recursion.
+
+Without it, the function could continue calling itself forever.
+
+```c
+if (n <= 0)
+{
+    return;
+}
+```
+
+### 2. Recursive Case
+
+The **Recursive Case** is where the function calls itself with a smaller or modified input.
+
+```c
+draw(n - 1);
+```
+
+The input should gradually move toward the Base Case.
+
+---
+
+## Example
+
+Using iteration, we could build a pyramid with loops.
+
+```text
+#
+##
+###
+####
+```
+
+But the same problem can be solved recursively:
+
+```c
+void draw(int n)
+{
+    if (n <= 0)
+    {
+        return;
+    }
+
+    draw(n - 1);
+
+    for (int i = 0; i < n; i++)
+    {
+        printf("#");
+    }
+
+    printf("\n");
+}
+```
+
+For:
+
+```c
+draw(4);
+```
+
+the function calls:
+
+```text
+draw(4)
+ ↓
+draw(3)
+ ↓
+draw(2)
+ ↓
+draw(1)
+ ↓
+draw(0)
+```
+
+`draw(0)` reaches the **Base Case** and returns.
+
+Then the previous function calls continue:
+
+```text
+#
+##
+###
+####
+```
+
+---
+
+
+## video 6: Merge Sort
+
+**Merge Sort** is a sorting algorithm based on the **Divide and Conquer** idea.
+
+Instead of sorting the entire array directly, we:
+
+```text
+Divide
+↓
+Sort smaller parts
+↓
+Merge
+```
+
+---
+
+## How It Works
+
+Suppose we have:
+
+```text
+6 3 8 5 2 7 4 1
+```
+
+First, divide the array into two halves:
+
+```text
+6 3 8 5    |    2 7 4 1
+```
+
+Then divide again:
+
+```text
+6 3 | 8 5 | 2 7 | 4 1
+```
+
+Continue until every part contains only one element:
+
+```text
+6 | 3 | 8 | 5 | 2 | 7 | 4 | 1
+```
+
+A single element is already considered sorted.
+
+---
+
+## Merge
+
+Now we start combining the elements in sorted order.
+
+```text
+6 + 3
+↓
+3 6
+```
+
+```text
+8 + 5
+↓
+5 8
+```
+
+Then:
+
+```text
+3 6 + 5 8
+↓
+3 5 6 8
+```
+
+The same process happens on the other half.
+
+Finally:
+
+```text
+3 5 6 8
++
+1 2 4 7
+
+↓
+
+1 2 3 4 5 6 7 8
+```
+
+## Running Time
+
+Each level processes approximately `n` elements.
+
+Therefore:
+
+```text
+O(n log n)
+```
+
+Merge Sort has:
+
+```text
+Worst Case: O(n log n)
+Best Case:  Ω(n log n)
+```
+
+This is significantly better than:
+
+```text
+Selection Sort → O(n²)
+Bubble Sort    → O(n²)
+```
+
+for large datasets.
+
+---
+
+## Sorting Comparison
+
+```text
+Selection Sort
+O(n²)
+
+Bubble Sort
+O(n²)
+
+Merge Sort
+O(n log n)
+```
+
+As `n` becomes large, the difference between:
+
+```text
+n²
+```
+
+and:
+
+```text
+n log n
+```
+
+becomes significant.
+
+---
