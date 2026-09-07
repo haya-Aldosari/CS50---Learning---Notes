@@ -1164,3 +1164,270 @@ scanf("%s", s);
 
 ---
 
+## video 8: File in C
+
+Until now, most data created by a program disappears when the program ends.
+
+In C, we can work with **files** to save data permanently.
+
+---
+
+## Opening a File
+
+To work with a file, we use:
+
+```c
+fopen()
+```
+
+Example:
+
+```c
+FILE *file = fopen("phonebook.csv", "a");
+```
+
+Here:
+
+```text
+FILE *file
+```
+
+stores a pointer to the opened file.
+
+And:
+
+```text
+"phonebook.csv"
+```
+
+is the file we want to open.
+
+---
+
+## File Modes
+
+The second argument tells `fopen()` what we want to do with the file.
+
+In the example:
+
+```c
+"a"
+```
+
+means **append**.
+
+This allows us to add new data to the end of the file.
+
+```c
+FILE *file = fopen("phonebook.csv", "a");
+```
+
+---
+
+## Checking the File
+
+After opening the file, we should make sure it was opened successfully.
+
+```c
+if (file == NULL)
+{
+    return 1;
+}
+```
+
+If `file` is `NULL`, the file could not be opened.
+
+---
+
+## Getting Data
+
+For example, we can ask the user for a name and phone number:
+
+```c
+string name = get_string("Name: ");
+string number = get_string("Number: ");
+```
+
+---
+
+## Writing to a File
+
+Instead of using:
+
+```c
+printf()
+```
+
+to print to the screen, we can use:
+
+```c
+fprintf()
+```
+
+to write into a file.
+
+Example:
+
+```c
+fprintf(file, "%s,%s\n", name, number);
+```
+
+This writes the name and number into:
+
+```text
+phonebook.csv
+```
+
+in a format like:
+
+```text
+Haya,0551234567
+Ahmed,0501234567
+```
+
+---
+
+## Closing the File
+
+After finishing with the file, we close it using:
+
+```c
+fclose(file);
+```
+
+So the complete process is:
+
+```text
+fopen()
+   ↓
+Open the file
+
+fprintf()
+   ↓
+Write data
+
+fclose()
+   ↓
+Close the file
+```
+
+---
+
+## Example
+
+```c
+#include <cs50.h>
+#include <stdio.h>
+
+int main(void)
+{
+    FILE *file = fopen("phonebook.csv", "a");
+
+    if (file == NULL)
+    {
+        return 1;
+    }
+
+    string name = get_string("Name: ");
+    string number = get_string("Number: ");
+
+    fprintf(file, "%s,%s\n", name, number);
+
+    fclose(file);
+}
+```
+
+---
+
+## video 9: JPEG
+
+A JPEG image is ultimately stored as a sequence of **bytes**.
+
+Different file types can be recognized by specific patterns of bytes at the beginning of the file.
+
+For JPEG files, the beginning contains:
+
+```text
+FF D8 FF
+```
+
+These values are written in **hexadecimal**.
+
+---
+
+## JPEG 
+
+A JPEG starts with:
+
+```text
+0xff 0xd8 0xff
+```
+
+---
+
+## Reading Bytes
+
+Files can be read using:
+
+```c
+fread()
+```
+
+For example, bytes can be stored inside a buffer:
+
+```c
+unsigned char c[3];
+```
+
+Then read from a file:
+
+```c
+fread(c, 1, 3, file);
+```
+
+The values can then be checked individually:
+
+```c
+c[0]
+c[1]
+c[2]
+```
+
+---
+
+## Detecting a JPEG
+
+The beginning of a JPEG can be checked using conditions:
+
+```c
+if (c[0] == 0xff &&
+    c[1] == 0xd8 &&
+    c[2] == 0xff)
+{
+    // JPEG
+}
+```
+
+---
+
+## Recovering Images
+
+Because JPEG files have a recognizable beginning, we can examine raw bytes and detect where a new JPEG image starts.
+
+The general idea is:
+
+```text
+Read bytes
+   ↓
+Check JPEG header
+   ↓
+Find beginning of image
+   ↓
+Write image data into a JPEG file
+```
+
+This allows deleted JPEG images to potentially be recovered when their raw data still exists.
+
+---
+
+
