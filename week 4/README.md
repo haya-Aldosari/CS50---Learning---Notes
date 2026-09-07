@@ -367,3 +367,655 @@ n = 100
 Even though we changed `*p`, the actual value of `n` changed because both refer to the same location in memory.
 
 ---
+
+## video 2: String
+
+A `string` is made of characters stored next to each other in memory.
+
+For example:
+
+```c
+string s = "HI!";
+```
+
+can be visualized as:
+
+```text
+H   I   !   \0
+```
+
+Each character has its own memory address.
+
+---
+
+## String and Pointers
+
+In CS50, `string` is essentially a pointer to a character.
+
+Instead of:
+
+```c
+string s = "HI!";
+```
+
+we can write:
+
+```c
+char *s = "HI!";
+```
+
+`char *` means:
+
+```text
+pointer to a char
+```
+
+The pointer stores the address of the **first character** in the string.
+
+```text
+s
+↓
+H → I → ! → \0
+```
+
+So `s` points to the first character `H`.
+
+---
+
+## CS50 String
+
+The `string` type comes from the CS50 library.
+
+Conceptually, it is defined as:
+
+```c
+typedef char *string;
+```
+
+This allows us to use:
+
+```c
+string s;
+```
+
+instead of writing:
+
+```c
+char *s;
+```
+
+---
+
+## Printing the Address
+
+Since `s` contains an address, we can print it using:
+
+```c
+printf("%p\n", s);
+```
+
+We can also get the address of the first character:
+
+```c
+printf("%p\n", &s[0]);
+```
+
+Both refer to the beginning of the string.
+
+---
+
+## video 3: Pointer Arithmetic
+
+Since a string is a pointer to its **first character**, we can use pointer arithmetic to access the rest of its characters.
+
+For example:
+
+```c
+char *s = "HI!";
+```
+
+`s` points to the first character:
+
+```text
+s
+↓
+H   I   !   \0
+```
+
+---
+
+## Moving Through Memory
+
+The characters of a string are stored next to each other in memory.
+
+So:
+
+```c
+s
+```
+
+points to the first character, while:
+
+```c
+s + 1
+```
+
+points to the next character.
+
+And:
+
+```c
+s + 2
+```
+
+points to the character after that.
+
+```text
+s       → H
+s + 1   → I
+s + 2   → !
+```
+
+---
+
+## Dereferencing
+
+To access the actual character stored at these addresses, we use `*`.
+
+```c
+*s
+```
+
+gives:
+
+```text
+H
+```
+
+And:
+
+```c
+*(s + 1)
+```
+
+gives:
+
+```text
+I
+```
+
+While:
+
+```c
+*(s + 2)
+```
+
+gives:
+
+```text
+!
+```
+
+---
+
+## Array Syntax vs Pointer Syntax
+
+Accessing a string using indexes:
+
+```c
+s[0]
+s[1]
+s[2]
+```
+
+is equivalent to:
+
+```c
+*s
+*(s + 1)
+*(s + 2)
+```
+
+So:
+
+```text
+s[0] = *(s + 0)
+
+s[1] = *(s + 1)
+
+s[2] = *(s + 2)
+```
+
+This shows the connection between **arrays, strings, and pointers** in C.
+
+---
+
+## video 4: Compare
+
+With normal variables such as integers, we can compare values directly:
+
+```c
+int x = 50;
+int y = 50;
+
+if (x == y)
+{
+    printf("Same\n");
+}
+```
+
+Here, `==` compares the actual values.
+
+---
+
+## Comparing Strings
+
+Strings work differently because a string is represented using a **pointer**.
+
+For example:
+
+```c
+char *s = get_string("s: ");
+char *t = get_string("t: ");
+```
+
+`s` and `t` contain memory addresses.
+
+So using:
+
+```c
+if (s == t)
+```
+
+does not compare the characters inside the strings.
+
+It compares:
+
+```text
+Address of s
+vs
+Address of t
+```
+
+Even if the user enters the same text twice, the two strings may exist in different locations in memory.
+
+```text
+s → H E L L O
+
+t → H E L L O
+```
+
+The characters are the same, but the addresses are different.
+
+---
+
+## Comparing Characters
+
+To know whether two strings are equal, their characters need to be compared.
+
+Conceptually:
+
+```text
+s[0] == t[0]
+s[1] == t[1]
+s[2] == t[2]
+...
+```
+
+until the end of the strings.
+
+---
+
+## `strcmp`
+
+Instead of manually comparing every character, C provides:
+
+```c
+strcmp(s, t)
+```
+
+from:
+
+```c
+#include <string.h>
+```
+
+If the two strings are the same:
+
+```c
+strcmp(s, t) == 0
+```
+
+Example:
+
+```c
+if (strcmp(s, t) == 0)
+{
+    printf("Same\n");
+}
+else
+{
+    printf("Different\n");
+}
+```
+
+---
+
+## video 5: malloc, free & valgrind
+
+In C, we can manually request space in memory using:
+
+```c
+malloc()
+```
+
+`malloc` stands for **memory allocation**.
+
+It reserves a specific amount of memory and returns the **address** of that memory.
+
+Example:
+
+```c
+char *t = malloc(4);
+```
+
+Here, `t` is a pointer that stores the address of the allocated memory.
+
+---
+
+## Checking `malloc`
+
+Memory allocation may fail.
+
+Therefore, after using `malloc`, we check whether the returned pointer is:
+
+```c
+NULL
+```
+
+Example:
+
+```c
+char *t = malloc(4 * sizeof(char));
+
+if (t == NULL)
+{
+    return 1;
+}
+```
+
+If `t` is `NULL`, the requested memory was not successfully allocated.
+
+---
+
+## Copying Data
+
+After allocating memory, we can copy data into the new memory location.
+
+The important idea is that the new pointer should have its **own allocated memory** instead of simply pointing to the same location as another pointer.
+
+```text
+s → original memory
+
+t → newly allocated memory
+```
+
+Now changes made through one pointer do not necessarily affect the other.
+
+---
+
+## `free()`
+
+Memory allocated using `malloc` should later be released using:
+
+```c
+free()
+```
+
+Example:
+
+```c
+free(t);
+```
+
+This tells the computer that the allocated memory is no longer needed.
+
+---
+
+## Memory Leak
+
+If memory is allocated using:
+
+```c
+malloc()
+```
+
+but never released using:
+
+```c
+free()
+```
+
+the program can cause a **memory leak**.
+
+```text
+malloc
+   ↓
+Memory allocated
+   ↓
+Program finishes using it
+   ↓
+free
+```
+
+---
+
+## Valgrind
+
+**Valgrind** is a tool used to check problems related to memory.
+
+It can help detect whether allocated memory was not properly freed.
+
+A program can be checked using:
+
+```bash
+valgrind ./program
+```
+
+Valgrind reports information about memory usage and possible memory problems.
+
+---
+
+## Main Relationship
+
+```text
+malloc()
+   ↓
+Allocate memory
+
+Pointer
+   ↓
+Access that memory
+
+free()
+   ↓
+Release memory
+
+Valgrind
+   ↓
+Check memory problems
+```
+
+---
+
+## video 6: Swap
+
+Suppose we have two variables:
+
+```c
+int x = 1;
+int y = 2;
+```
+
+We want to swap their values so that:
+
+```text
+x = 2
+y = 1
+```
+
+A temporary variable can be used:
+
+```c
+int tmp = x;
+x = y;
+y = tmp;
+```
+
+---
+
+## Creating a `swap` Function
+
+We might try:
+
+```c
+void swap(int a, int b)
+{
+    int tmp = a;
+    a = b;
+    b = tmp;
+}
+```
+
+And call it with:
+
+```c
+swap(x, y);
+```
+
+But the original values of `x` and `y` do not change.
+
+---
+
+## Why It Does Not Work
+
+When we pass:
+
+```c
+swap(x, y);
+```
+
+the function receives **copies** of the values.
+
+```text
+x → 1
+y → 2
+
+a → copy of x
+b → copy of y
+```
+
+The function swaps:
+
+```text
+a and b
+```
+
+but the original:
+
+```text
+x and y
+```
+
+remain unchanged.
+
+---
+
+## Using Pointers
+
+To change the original variables, we can pass their **memory addresses** instead.
+
+The function becomes:
+
+```c
+void swap(int *a, int *b)
+{
+    int tmp = *a;
+    *a = *b;
+    *b = tmp;
+}
+```
+
+And we call it using:
+
+```c
+swap(&x, &y);
+```
+
+---
+
+## Understanding the Code
+
+When calling:
+
+```c
+swap(&x, &y);
+```
+
+we send:
+
+```text
+&x → address of x
+&y → address of y
+```
+
+Inside the function:
+
+```c
+*a
+```
+
+means the value stored at the address of `x`.
+
+And:
+
+```c
+*b
+```
+
+means the value stored at the address of `y`.
+
+So:
+
+```c
+int tmp = *a;
+*a = *b;
+*b = tmp;
+```
+
+changes the **original values**.
+
+---
+
+## Before and After
+
+Before:
+
+```text
+x = 1
+y = 2
+```
+
+Call:
+
+```c
+swap(&x, &y);
+```
+
+After:
+
+```text
+x = 2
+y = 1
+```
+
