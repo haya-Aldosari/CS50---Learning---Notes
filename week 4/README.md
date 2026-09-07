@@ -1019,3 +1019,148 @@ x = 2
 y = 1
 ```
 
+## video 7: scanf
+
+`scanf()` is a C function used to take input from the user.
+
+Example:
+
+```c
+int x;
+
+scanf("%i", &x);
+```
+
+---
+
+## Why We Use `&`
+
+`scanf()` needs the **memory address** where it should store the user's input.
+
+```c
+&x
+```
+
+means:
+
+```text
+Address of x
+```
+
+So:
+
+```c
+scanf("%i", &x);
+```
+
+means:
+
+```text
+Read an integer
+↓
+Store it at the address of x
+```
+
+---
+
+## Format Specifiers
+
+The format specifier tells `scanf()` what type of input to expect.
+
+```c
+%i
+```
+
+is used for an integer.
+
+Example:
+
+```c
+int x;
+
+printf("x: ");
+scanf("%i", &x);
+
+printf("%i\n", x);
+```
+
+---
+
+## scanf and Pointers
+
+This connects directly to pointers.
+
+```text
+x   → value
+
+&x  → address of x
+```
+
+By giving `scanf()` the address:
+
+```c
+scanf("%i", &x);
+```
+
+the function can store the input directly inside `x`.
+
+---
+
+## Strings
+
+A string is represented using a pointer:
+
+```c
+char *s;
+```
+
+Since a pointer should point to valid memory before storing characters in it, memory can be allocated first.
+
+```c
+char *s = malloc(4);
+```
+
+Then:
+
+```c
+scanf("%s", s);
+```
+
+Here we do not write:
+
+```c
+&s
+```
+
+because `s` already contains a memory address.
+
+---
+
+## Integer vs String
+
+For an integer:
+
+```c
+int x;
+scanf("%i", &x);
+```
+
+We use:
+
+```text
+&x
+```
+
+because we need the address of `x`.
+
+For a string pointer:
+
+```c
+char *s = malloc(4);
+scanf("%s", s);
+```
+
+`s` itself already represents an address.
+
+---
+
