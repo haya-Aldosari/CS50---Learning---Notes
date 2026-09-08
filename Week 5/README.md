@@ -490,3 +490,461 @@ A Tree allows nodes to branch:
     [2]   [6]
 ```
 
+## video 4: Create Tree in C
+
+A tree can be created in C using a `struct`.
+
+Each node contains:
+
+```text
+Value
+Left pointer
+Right pointer
+```
+
+---
+
+## Node Structure
+
+```c
+typedef struct node
+{
+    int number;
+    struct node *left;
+    struct node *right;
+}
+node;
+```
+
+Here:
+
+```c
+int number;
+```
+
+stores the value.
+
+And:
+
+```c
+struct node *left;
+struct node *right;
+```
+
+store the addresses of the left and right children.
+
+---
+
+## Starting the Tree
+
+At first, the tree is empty:
+
+```c
+node *tree = NULL;
+```
+
+So:
+
+```text
+tree
+ ↓
+NULL
+```
+
+---
+
+## Creating a Node
+
+Memory for a node is allocated using:
+
+```c
+node *n = malloc(sizeof(node));
+```
+
+Then its values can be initialized:
+
+```c
+n->number = 2;
+n->left = NULL;
+n->right = NULL;
+```
+
+The new node can become the root:
+
+```c
+tree = n;
+```
+
+Now:
+
+```text
+tree
+ ↓
+[ 2 ]
+```
+
+---
+
+## Adding a Left Child
+
+Another node can be created:
+
+```c
+n = malloc(sizeof(node));
+```
+
+Then:
+
+```c
+n->number = 1;
+n->left = NULL;
+n->right = NULL;
+```
+
+It can be connected to the left side:
+
+```c
+tree->left = n;
+```
+
+Now:
+
+```text
+    2
+   /
+  1
+```
+
+---
+
+## Adding a Right Child
+
+Another node can be created:
+
+```c
+n = malloc(sizeof(node));
+```
+
+Then:
+
+```c
+n->number = 3;
+n->left = NULL;
+n->right = NULL;
+```
+
+And connected using:
+
+```c
+tree->right = n;
+```
+
+The tree becomes:
+
+```text
+    2
+   / \
+  1   3
+```
+
+---
+
+## Accessing Nodes
+
+The root value can be accessed using:
+
+```c
+tree->number
+```
+
+The left child:
+
+```c
+tree->left->number
+```
+
+The right child:
+
+```c
+tree->right->number
+```
+
+So:
+
+```text
+tree->left->number   → 1
+
+tree->number         → 2
+
+tree->right->number  → 3
+```
+
+---
+
+## video 5: Search in Binary Tree
+
+In a **Binary Search Tree**, values are organized so that:
+
+```text
+Smaller values → Left
+
+Larger values → Right
+```
+
+Example:
+
+```text
+        4
+       / \
+      2   6
+     / \ / \
+    1  3 5  7
+```
+
+This structure allows us to choose which direction to search.
+
+---
+
+## Search Logic
+
+Suppose we want to search for:
+
+```text
+7
+```
+
+Start at the root:
+
+```text
+4
+```
+
+Since:
+
+```text
+7 > 4
+```
+
+move to the right.
+
+Now:
+
+```text
+6
+```
+
+Since:
+
+```text
+7 > 6
+```
+
+move to the right again.
+
+Then:
+
+```text
+7
+```
+
+The value is found.
+
+---
+
+## Recursive Search
+
+The search can be implemented recursively.
+
+```c
+bool search(node *tree, int number)
+{
+    if (tree == NULL)
+    {
+        return false;
+    }
+    else if (number < tree->number)
+    {
+        return search(tree->left, number);
+    }
+    else if (number > tree->number)
+    {
+        return search(tree->right, number);
+    }
+    else
+    {
+        return true;
+    }
+}
+```
+
+---
+
+## Base Case
+
+If:
+
+```c
+tree == NULL
+```
+
+then the number does not exist in the tree:
+
+```c
+return false;
+```
+
+---
+
+## Search Left
+
+If the number we want is smaller than the current node:
+
+```c
+number < tree->number
+```
+
+search the left side:
+
+```c
+return search(tree->left, number);
+```
+
+---
+
+## Search Right
+
+If the number is larger:
+
+```c
+number > tree->number
+```
+
+search the right side:
+
+```c
+return search(tree->right, number);
+```
+
+---
+
+## Value Found
+
+If the number is neither smaller nor larger:
+
+```text
+number == tree->number
+```
+
+then the value was found:
+
+```c
+return true;
+```
+
+---
+
+## video 6: Hash Tables
+
+A **Hash Table** is a data structure used to store data in a way that makes searching faster.
+
+It combines ideas from:
+
+```text
+Arrays
++
+Linked Lists
+```
+
+---
+
+## Hash Function
+
+A **Hash Function** takes a value and determines where it should be stored inside the table.
+
+For example, names can be organized based on their first letter:
+
+```text
+A → ...
+B → ...
+C → ...
+D → ...
+```
+
+Instead of searching through every value, the program first determines the correct location.
+
+---
+
+## Buckets
+
+A Hash Table contains multiple locations or **buckets**.
+
+Conceptually:
+
+```text
+[0] → data
+[1] → data
+[2] → data
+[3] → data
+```
+
+The hash function decides which bucket should contain each value.
+
+---
+
+## Collision
+
+Sometimes two values are assigned to the same location.
+
+This is called a:
+
+```text
+Collision
+```
+
+Instead of storing only one value in that location, a **Linked List** can be used:
+
+```text
+[0] → node → node → NULL
+[1] → node → NULL
+[2] → NULL
+```
+
+So multiple values can exist in the same bucket.
+
+---
+
+## Searching
+
+Searching follows two main steps:
+
+```text
+Value
+  ↓
+Hash Function
+  ↓
+Find the correct bucket
+  ↓
+Search inside that bucket
+```
+
+This avoids searching through the entire collection from beginning to end.
+
+---
+
+## Structure
+
+A Hash Table can be visualized as:
+
+```text
+Array
+  ↓
+[0] → Linked List
+[1] → Linked List
+[2] → Linked List
+[3] → Linked List
+```
+
+So it uses an **array** to organize the data and **linked lists** when multiple values belong to the same location.
+
+---
+
