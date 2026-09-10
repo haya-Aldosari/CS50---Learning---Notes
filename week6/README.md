@@ -304,3 +304,76 @@ x = 10
 print(type(x))
 ```
 
+## video 3: Input
+
+Python provides the built-in:
+
+```python
+input()
+```
+
+to receive input from the user.
+
+Example:
+
+```python
+name = input("What's your name? ")
+print(name)
+```
+
+---
+
+## `input()` Returns a String
+
+The value returned by `input()` is treated as a **string**, even when the user enters a number.
+
+```python
+age = input("Age: ")
+```
+
+So if we need an integer, we convert it using:
+
+```python
+age = int(input("Age: "))
+```
+
+---
+
+## Type Conversion
+
+Python can convert values between data types.
+
+```python
+int()
+float()
+str()
+```
+
+Example:
+
+```python
+x = int(input("x: "))
+y = int(input("y: "))
+
+print(x + y)
+```
+
+---
+
+## CS50 Input Functions
+
+Input can also be taken using functions from the CS50 library.
+
+```python
+from cs50 import get_string, get_int
+```
+
+Examples:
+
+```python
+name = get_string("Name: ")
+age = get_int("Age: ")
+```
+
+---
+
