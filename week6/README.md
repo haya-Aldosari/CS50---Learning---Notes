@@ -138,5 +138,169 @@ Python removes much of the extra syntax used in C, making the code shorter and e
 
 ---
 
+## video 2: Python Data Types
+
+Python has different data types used to represent different kinds of values.
+
+Common examples include:
+
+```python
+x = 10          # int
+y = 3.5         # float
+name = "Haya"   # str
+active = True   # bool
+```
+
+---
+
+## Integer
+
+`int` represents whole numbers.
+
+```python
+x = 10
+y = -5
+```
+
+```text
+int → whole numbers
+```
+
+---
+
+## Float
+
+`float` represents numbers with decimal points.
+
+```python
+price = 10.5
+```
+
+```text
+float → decimal numbers
+```
+
+---
+
+## String
+
+`str` represents text.
+
+```python
+name = "Haya"
+```
+
+Strings are written inside quotation marks.
+
+```text
+str → text
+```
+
+---
+
+## Boolean
+
+`bool` represents a value that can be:
+
+```python
+True
+False
+```
+
+Example:
+
+```python
+is_student = True
+```
+
+---
+
+## List
+
+A `list` can store multiple values together.
+
+```python
+numbers = [1, 2, 3, 4]
+```
+
+Values are accessed using an index:
+
+```python
+numbers[0]
+```
+
+---
+
+## Tuple
+
+A `tuple` stores multiple values together, similar to a list.
+
+```python
+numbers = (1, 2, 3)
+```
+
+A tuple is **immutable**, meaning its values cannot be changed after it is created.
+
+---
+
+## Set
+
+A `set` stores a collection of **unique values**.
+
+```python
+numbers = {1, 2, 3}
+```
+
+Duplicate values are removed automatically.
+
+Example:
+
+```python
+numbers = {1, 2, 2, 3}
+
+print(numbers)
+```
+
+Result:
+
+```text
+{1, 2, 3}
+```
+
+---
+
+## Dictionary
+
+A dictionary stores data using **keys and values**.
+
+```python
+person = {
+    "name": "Haya",
+    "age": 21
+}
+```
+
+A value can be accessed using its key:
+
+```python
+person["name"]
+```
+
+---
+
+## Checking the Type
+
+Python can identify the data type of a value using:
+
+```python
+type()
+```
+
+Example:
+
+```python
+x = 10
+
+print(type(x))
 ```
 
