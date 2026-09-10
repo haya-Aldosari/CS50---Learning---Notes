@@ -377,3 +377,104 @@ age = get_int("Age: ")
 
 ---
 
+## video 4: Python Exceptions
+
+## Exceptions
+
+An **exception** is an error that happens while the program is running.
+
+For example, converting invalid input to an integer can cause an error.
+
+```python
+x = int(input("x: "))
+```
+
+If the user enters text instead of a number, Python raises an exception.
+
+---
+
+## `try`
+
+Python allows us to test code that might cause an error using:
+
+```python
+try:
+```
+
+Example:
+
+```python
+try:
+    x = int(input("x: "))
+```
+
+---
+
+## `except`
+
+If an error happens, we can handle it using:
+
+```python
+except:
+```
+
+Example:
+
+```python
+try:
+    x = int(input("x: "))
+except:
+    print("Invalid input")
+```
+
+This prevents the program from stopping immediately when an error occurs.
+
+---
+
+## `ValueError`
+
+One common exception is:
+
+```text
+ValueError
+```
+
+It can happen when a value has the wrong format for an operation.
+
+Example:
+
+```python
+try:
+    x = int(input("x: "))
+except ValueError:
+    print("Not an integer")
+```
+
+---
+
+## Handling Errors
+
+Instead of allowing the program to crash:
+
+```text
+Error
+↓
+Program stops
+```
+
+we can handle the exception:
+
+```text
+try
+↓
+Run code
+↓
+Error?
+↓
+except
+↓
+Handle the error
+```
+
+---
+
