@@ -478,3 +478,91 @@ Handle the error
 
 ---
 
+
+## video 5: – Functions in Python
+
+A **function** is a reusable block of code that performs a specific task.
+
+Python already provides built-in functions such as:
+
+```python
+print()
+input()
+int()
+```
+
+---
+
+## Creating a Function
+
+A function is created using:
+
+```python
+def
+```
+
+Example:
+
+```python
+def hello():
+    print("Hello")
+```
+
+---
+
+## Calling a Function
+
+Defining a function does not run it automatically.
+
+To execute it, we call the function by its name:
+
+```python
+hello()
+```
+
+---
+
+## Passing Values
+
+A function can receive values when it is called.
+
+```python
+def hello(name):
+    print(f"Hello, {name}")
+```
+
+Then:
+
+```python
+hello("Haya")
+```
+
+The value is passed into the function and used inside it.
+
+---
+
+## Returning a Value
+
+A function can send a result back using:
+
+```python
+return
+```
+
+Example:
+
+```python
+def square(n):
+    return n * n
+```
+
+Then:
+
+```python
+x = square(5)
+```
+
+The returned value can be stored and used later.
+
+---
+
