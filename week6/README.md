@@ -1102,3 +1102,109 @@ else:
 
 Python searches the list to determine whether the value exists.
 
+## Video 16: Phonebook
+
+## Dictionary
+
+A dictionary in Python stores data as **key-value pairs**.
+
+For example, a phonebook can store a person's name as the key and their phone number as the value:
+
+```python
+people = {
+    "Brian": "1000",
+    "David": "2750"
+}
+```
+
+In this dictionary:
+
+- `"Brian"` and `"David"` are the keys.
+- Their phone numbers are the corresponding values.
+
+## Dictionary Syntax
+
+Dictionaries are created using curly braces:
+
+```python
+{}
+```
+
+Each key is connected to its value using `:`:
+
+## Searching the Phonebook
+
+The program can ask the user for a name:
+
+```python
+from cs50 import get_string
+
+name = get_string("Name: ")
+```
+
+Then `in` can be used to check whether the name exists in the dictionary:
+
+```python
+if name in people:
+    print(f"Number: {people[name]}")
+```
+
+## Complete Example
+
+```python
+from cs50 import get_string
+
+people = {
+    "Brian": "1000",
+    "David": "2750"
+}
+
+name = get_string("Name: ")
+
+if name in people:
+    print(f"Number: {people[name]}")
+```
+
+## Video 17: Pointers in Python
+
+In C, comparing strings required dealing with how strings are stored in memory and using functions such as `strcmp`.
+
+In Python, strings can be compared directly using `==`.
+
+```python
+s = input("s: ")
+t = input("t: ")
+
+if s == t:
+    print("Same")
+else:
+    print("Different")
+```
+
+Python handles the comparison without requiring us to work with pointers manually.
+
+## Swapping Values
+
+In C, swapping two variables required more steps and an additional temporary variable.
+
+In Python, values can be swapped directly:
+
+```python
+x = 1
+y = 2
+
+print(f"x is {x}, y is {y}")
+
+x, y = y, x
+
+print(f"x is {x}, y is {y}")
+```
+
+The line:
+
+```python
+x, y = y, x
+```
+
+swaps the values of `x` and `y`.
+
