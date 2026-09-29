@@ -957,3 +957,148 @@ for arg in argv[1:]:
 
 `argv[1:]` starts from index `1`, so the program filename stored in `argv[0]` is skipped.
 
+## Video 14: sys exit
+
+Instead of importing only `argv`, the entire `sys` module can be imported:
+
+```python
+import sys
+```
+
+When importing the whole module, `argv` is accessed using:
+
+```python
+sys.argv
+```
+
+## Checking Command Line Arguments
+
+The program can check the number of command line arguments using `len()`:
+
+```python
+if len(sys.argv) != 2:
+    print("Missing command-line argument")
+```
+
+`sys.argv` contains the command line arguments, so `len(sys.argv)` tells us how many elements were provided.
+
+## `sys.exit()`
+
+`sys.exit()` is used to stop the program.
+
+```python
+sys.exit(1)
+```
+
+For example:
+
+```python
+import sys
+
+if len(sys.argv) != 2:
+    print("Missing command-line argument")
+    sys.exit(1)
+
+print(f"hello, {sys.argv[1]}")
+```
+
+If the required argument is missing, the program prints the message and stops immediately.
+
+## Exit Codes
+
+An exit code indicates whether the program finished successfully or encountered a problem.
+
+```python
+sys.exit(0)
+```
+
+`0` indicates that the program finished successfully.
+
+```python
+sys.exit(1)
+```
+
+`1` indicates that something went wrong.
+
+Example:
+
+```python
+import sys
+
+if len(sys.argv) != 2:
+    print("Missing command-line argument")
+    sys.exit(1)
+
+print(f"hello, {sys.argv[1]}")
+sys.exit(0)
+```
+
+## Video 15: Linear Search
+
+Linear search is used to search for a value inside a collection of values.
+
+In Python, we can create a list:
+
+```python
+numbers = [4, 6, 8, 2, 7, 5, 0]
+```
+
+## Searching Using `in`
+
+Python allows us to check whether a value exists inside a list using the `in` keyword.
+
+```python
+if 0 in numbers:
+    print("Found")
+```
+
+If the value exists in the list, the condition becomes `True`.
+
+## Using `sys.exit()`
+
+The search can be combined with `sys.exit()`:
+
+```python
+import sys
+
+numbers = [4, 6, 8, 2, 7, 5, 0]
+
+if 0 in numbers:
+    print("Found")
+    sys.exit(0)
+
+print("Not found")
+sys.exit(1)
+```
+
+If the number is found:
+
+```python
+sys.exit(0)
+```
+
+is used.
+
+If the number is not found:
+
+```python
+sys.exit(1)
+```
+
+is used.
+
+## Searching in a List of Strings
+
+The same idea can be used with strings:
+
+```python
+names = ["Bill", "Charlie", "Fred", "George", "Ginny", "Percy", "Ron"]
+
+if "Ron" in names:
+    print("Found")
+else:
+    print("Not found")
+```
+
+Python searches the list to determine whether the value exists.
+
