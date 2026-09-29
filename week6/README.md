@@ -851,3 +851,109 @@ Before: hello world
 After: HELLO WORLD
 ```
 
+## Video 13: Command Line Arguments
+
+Command line arguments allow us to give values to the program when we run it from the terminal instead of asking for them later using `input()`.
+
+For example:
+
+```python
+python argv.py Haya
+```
+
+Here, `Haya` is a command line argument.
+
+## `sys` Module
+
+To work with command line arguments, Python provides the `sys` module.
+
+We can import `argv` from it:
+
+```python
+from sys import argv
+```
+
+## `argv`
+
+`argv` stores the command line arguments in a list.
+
+For example, if we run:
+
+```python
+python argv.py Haya
+```
+
+the list contains the program name and the argument.
+
+```python
+argv[0]
+```
+
+contains the name of the Python file:
+
+```text
+argv.py
+```
+
+and:
+
+```python
+argv[1]
+```
+
+contains:
+
+```text
+Haya
+```
+
+## Using `len()`
+
+Because `argv` is a list, `len()` can be used to check how many elements it contains.
+
+```python
+from sys import argv
+
+if len(argv) == 2:
+    print(f"hello, {argv[1]}")
+else:
+    print("hello, world")
+```
+
+If one argument is provided, the program prints it.
+
+## Looping Through `argv`
+
+Since `argv` is a list, we can also loop through it.
+
+```python
+from sys import argv
+
+for arg in argv:
+    print(arg)
+```
+
+The loop goes through the command line arguments one by one.
+
+It can also be written using indexes:
+
+```python
+from sys import argv
+
+for i in range(len(argv)):
+    print(argv[i])
+```
+
+## List Slicing
+
+We can use slicing if we do not want to include the first element of `argv`.
+
+```python
+from sys import argv
+
+for arg in argv[1:]:
+    print(arg)
+```
+
+`argv[1:]` starts from index `1`, so the program filename stored in `argv[0]` is skipped.
+
