@@ -1208,3 +1208,159 @@ x, y = y, x
 
 swaps the values of `x` and `y`.
 
+## Video 18: Files in Python
+
+Instead of keeping the phonebook data inside the program, Python can save the data in a file.
+
+In this example, the data is stored in a CSV file.
+
+## Importing `csv`
+
+Python provides the `csv` library for working with CSV files.
+
+```python
+import csv
+```
+
+## Opening a File
+
+The `open()` function is used to open a file:
+
+```python
+file = open("phonebook.csv", "a")
+```
+
+`phonebook.csv` is the file name.
+
+The opened file is stored in the variable:
+
+```python
+file
+```
+
+## Getting the Data
+
+The program asks the user for a name and phone number:
+
+```python
+from cs50 import get_string
+
+name = get_string("Name: ")
+number = get_string("Number: ")
+```
+
+## `csv.writer()`
+
+A writer is created for the opened file:
+
+```python
+writer = csv.writer(file)
+```
+
+This allows the program to write data into the CSV file.
+
+## `writerow()`
+
+The name and number are written as one row:
+
+```python
+writer.writerow([name, number])
+```
+
+The values are passed as a list:
+
+```python
+[name, number]
+```
+
+The resulting CSV data looks like:
+
+```text
+Carter,1000
+```
+
+## Closing the File
+
+After finishing with the file, it is closed using:
+
+```python
+file.close()
+```
+
+## Complete Example
+
+```python
+import csv
+from cs50 import get_string
+
+file = open("phonebook.csv", "a")
+
+name = get_string("Name: ")
+number = get_string("Number: ")
+
+writer = csv.writer(file)
+writer.writerow([name, number])
+
+file.close()
+```
+
+## Video 20: `with`, `r+`, `w+`, `a+` in Python
+
+## Using `with`
+
+Instead of opening a file and closing it manually:
+
+```python
+file = open("file.txt", "r")
+
+# work with the file
+
+file.close()
+```
+
+Python can use `with`:
+
+```python
+with open("file.txt", "r") as file:
+    # work with the file
+```
+
+When using `with`, the file is closed automatically after finishing the block.
+
+## `r+`
+
+`r+` allows the file to be opened for both reading and writing.
+
+```python
+with open("file.txt", "r+") as file:
+    ...
+```
+
+The file must already exist.
+
+## `w+`
+
+`w+` allows both writing and reading.
+
+```python
+with open("file.txt", "w+") as file:
+    ...
+```
+
+If the file already contains data, its existing content is removed.
+
+If the file does not exist, a new file is created.
+
+## `a+`
+
+`a+` allows reading and appending data to a file.
+
+```python
+with open("file.txt", "a+") as file:
+    ...
+```
+
+New data is added to the end of the file instead of replacing the existing content.
+
+If the file does not exist, it can be created.
+
