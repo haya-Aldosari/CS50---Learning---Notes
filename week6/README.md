@@ -566,3 +566,288 @@ The returned value can be stored and used later.
 
 ---
 
+## Video 10: Mario3 and Nested Loops
+
+This lesson continues the Mario exercise in Python and introduces **nested loops**, where one loop runs inside another loop.
+
+Nested loops are useful when a program needs to repeat something across multiple rows and columns, such as creating patterns, grids, or shapes.
+
+## Nested Loops
+
+A nested loop consists of:
+
+- An **outer loop**, which controls the number of rows.
+- An **inner loop**, which controls what happens inside each row.
+
+Example:
+
+```python
+for i in range(3):
+    for j in range(3):
+        print("#", end="")
+    print()
+```
+
+Output:
+
+```text
+###
+###
+###
+```
+
+The outer loop runs three times, creating three rows.
+
+For every iteration of the outer loop, the inner loop also runs three times and prints three `#` characters.
+
+## Using `end=""`
+
+Normally, Python's `print()` function moves to a new line after printing.
+
+```python
+print("#")
+```
+
+However, using:
+
+```python
+print("#", end="")
+```
+
+keeps the next output on the same line.
+
+After the inner loop finishes, a normal:
+
+```python
+print()
+```
+
+is used to move to the next line.
+
+## Video 11: Average in Python
+
+This lesson demonstrates how Python lists can be used to store multiple values and calculate their average.
+
+It also shows how Python provides built-in functions that simplify operations that would require more manual work in languages such as C.
+
+## Python Lists
+
+A list can store multiple values inside one variable.
+
+Example:
+
+```python
+scores = [72, 73, 33]
+```
+
+Unlike arrays in C, Python lists can grow dynamically, so their size does not need to be defined in advance.
+
+An empty list can be created using:
+
+```python
+scores = []
+```
+
+## Adding Elements with `append()`
+
+The `append()` method is used to add a new element to the end of a list.
+
+Example:
+
+```python
+scores.append(72)
+scores.append(73)
+scores.append(33)
+```
+
+The list will become:
+
+```python
+[72, 73, 33]
+```
+
+This makes it easy to collect values dynamically from the user.
+
+## Using a Loop to Collect Values
+
+Instead of writing every value manually, a loop can be used.
+
+```python
+from cs50 import get_int
+
+scores = []
+
+for i in range(3):
+    scores.append(get_int("Score: "))
+```
+
+The loop runs three times and adds every entered score to the `scores` list.
+
+## `sum()` Function
+
+Python provides the built-in `sum()` function to calculate the total of all numeric elements in a list.
+
+```python
+sum(scores)
+```
+
+For example:
+
+```python
+scores = [72, 73, 33]
+print(sum(scores))
+```
+
+Output:
+
+```text
+178
+```
+
+## `len()` Function
+
+The `len()` function returns the number of elements in a list.
+
+```python
+len(scores)
+```
+
+For:
+
+```python
+scores = [72, 73, 33]
+```
+
+the result is:
+
+```text
+3
+```
+
+## Calculating the Average
+
+The average can be calculated by dividing the total of the values by the number of values.
+
+```python
+average = sum(scores) / len(scores)
+```
+
+Then the result can be displayed using an f-string:
+
+```python
+print(f"Average: {average}")
+```
+
+Complete example:
+
+```python
+from cs50 import get_int
+
+scores = []
+
+for i in range(3):
+    scores.append(get_int("Score: "))
+
+average = sum(scores) / len(scores)
+
+print(f"Average: {average}")
+```
+
+## F-Strings
+
+Python f-strings allow variables and expressions to be included directly inside strings.
+
+Example:
+
+```python
+average = 85
+
+print(f"Average: {average}")
+```
+
+They can also contain expressions directly:
+
+```python
+print(f"Average: {sum(scores) / len(scores)}")
+```
+
+However, storing the result in a variable can make the code easier to read.
+
+## Video 12: Uppercase in Python
+
+This lesson demonstrates how to work with strings in Python and convert text from lowercase to uppercase.
+
+Python provides built-in string methods that make text manipulation much simpler compared to implementing the same logic manually.
+
+## Getting Text from the User
+
+A string can be received from the user using `input()`:
+
+```python
+text = input("Before: ")
+```
+
+The entered value is stored as a string and can then be processed character by character or using Python's built-in string methods.
+
+## Iterating Through a String
+
+Python allows us to loop directly through the characters of a string.
+
+```python
+for c in text:
+    print(c)
+```
+
+If the user enters:
+
+```text
+hello
+```
+
+the loop processes each character separately:
+
+```text
+h
+e
+l
+l
+o
+```
+
+There is no need to manually access every character using its index.
+
+## Converting Characters to Uppercase
+
+Python strings provide the `.upper()` method.
+
+```python
+letter = "h"
+
+print(letter.upper())
+```
+
+Output:
+
+```text
+H
+```
+
+## Using `.upper()` on the Entire String
+
+Instead of converting one character at a time, Python can convert the entire string directly:
+
+```python
+text = input("Before: ")
+
+print("After:", text.upper())
+```
+
+This produces the same result with much less code.
+
+For example:
+
+```text
+Before: hello world
+After: HELLO WORLD
+```
+
